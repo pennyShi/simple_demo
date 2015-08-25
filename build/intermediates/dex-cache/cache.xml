@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/rrtoyewx/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="/Users/rrtoyewx/Documents/android/SmipleDemo/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-5caacd41f3762b8c74232e2ba3ccb0ee4e731a4a.jar" />
+    </item>
+    <item
+        jar="/Users/rrtoyewx/Documents/android/SmipleDemo/app/libs/gson-2.3.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/Users/rrtoyewx/Documents/android/SmipleDemo/app/build/intermediates/pre-dexed/debug/gson-2.3.1-56feaffb054c7f929b94479bcb2c226df3570302.jar" />
+    </item>
+    <item
+        jar="/Users/rrtoyewx/Documents/android/SmipleDemo/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/Users/rrtoyewx/Documents/android/SmipleDemo/app/build/intermediates/pre-dexed/debug/classes-df6c3b5c09c4c29129a224ad3b30b57caf1a8f14.jar" />
+    </item>
+    <item
+        jar="/Users/rrtoyewx/Documents/android/SmipleDemo/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/Users/rrtoyewx/Documents/android/SmipleDemo/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-6ba4ac7382b3e2197a1f08e89eebec5c2245f2a8.jar" />
+    </item>
+    <item
+        jar="/Users/rrtoyewx/Documents/android/SmipleDemo/app/libs/jackson-annotations-2.6.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a0990e2e812ac6639b6ce955c91b13228500476e">
+        <dex dex="/Users/rrtoyewx/Documents/android/SmipleDemo/app/build/intermediates/pre-dexed/debug/jackson-annotations-2.6.0-02b59c56894ac0400dbaf4595cd3119d49a13e4f.jar" />
+    </item>
+    <item
+        jar="/Users/rrtoyewx/Documents/android/SmipleDemo/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="/Users/rrtoyewx/Documents/android/SmipleDemo/app/build/intermediates/pre-dexed/debug/classes-ceb1089bbd2982ae2a496f71fe2f4fa93e395317.jar" />
+    </item>
+
+</items>
