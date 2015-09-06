@@ -3,6 +3,7 @@ package com.idreamo.rrtoyewx.smipledemo;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -18,6 +19,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.idreamo.rrtoyewx.smipledemo.adapter.LeftMenuAdapter;
+import com.idreamo.rrtoyewx.smipledemo.page.BasePage;
+import com.idreamo.rrtoyewx.smipledemo.page.MusicPage;
+import com.idreamo.rrtoyewx.smipledemo.page.NewsPage;
+import com.idreamo.rrtoyewx.smipledemo.page.PhotoPage;
+import com.idreamo.rrtoyewx.smipledemo.page.VideoPage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mActionBarDrawerToggle;
     private ListView mLeftMenu;
     private LeftMenuAdapter mLeftMenuAdapter;
+    private List<BasePage> mPageLiset;
+    private FragmentManager mFragmentManager;
 
     private static final SparseArray<Integer> titles = new SparseArray<>();
 
@@ -79,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void initData() {
+        mFragmentManager = getSupportFragmentManager();
         titles.clear();
         titles.put(0, R.string.news);
         titles.put(1, R.string.photo);
@@ -86,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
         titles.put(3,R.string.music);
         mLeftMenuAdapter = new LeftMenuAdapter(this,titles);
         mLeftMenu.setAdapter(mLeftMenuAdapter);
+        mPageLiset = new ArrayList<>();
+        mPageLiset.add(new NewsPage());
+        mPageLiset.add(new PhotoPage());
+        mPageLiset.add(new VideoPage());
+        mPageLiset.add(new MusicPage());
+        mFragmentManager.beginTransaction().add(R.id.main_content,mPageLiset.get(0),NewsPage.TAG).commit();
     }
 
     @Override
@@ -105,28 +123,54 @@ public class MainActivity extends AppCompatActivity {
         mLeftMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 0:
                         mDrawLayout.closeDrawer(Gravity.LEFT);
                         setToolbarTitle(R.string.News);
+                        setPageContent(R.string.news);
                         break;
                     case 1:
                         mDrawLayout.closeDrawer(Gravity.LEFT);
                         setToolbarTitle(R.string.Photo);
+                        setPageContent(R.string.photo);
                         break;
                     case 2:
                         mDrawLayout.closeDrawer(Gravity.LEFT);
                         setToolbarTitle(R.string.Video);
+                        setPageContent(R.string.video);
                         break;
                     case 3:
                         mDrawLayout.closeDrawer(Gravity.LEFT);
                         setToolbarTitle(R.string.Music);
+                        setPageContent(R.string.music);
                         break;
                     default:
                 }
             }
         });
     }
+
+    private void setPageContent(int rsd) {
+        switch (rsd){
+            case R.string.news:
+                mFragmentManager.beginTransaction().replace(R.id.main_content,mPageLiset.get(0),NewsPage.TAG).commit();
+                mPageLiset.get(0).initData();
+                break;
+            case R.string.photo:
+                mFragmentManager.beginTransaction().replace(R.id.main_content,mPageLiset.get(1),PhotoPage.TAG).commit();
+                mPageLiset.get(1).initData();
+                break;
+            case R.string.video:
+                mFragmentManager.beginTransaction().replace(R.id.main_content,mPageLiset.get(2),VideoPage.TAG).commit();
+                mPageLiset.get(2).initData();
+                break;
+            case R.string.music:
+                mFragmentManager.beginTransaction().replace(R.id.main_content,mPageLiset.get(3),MusicPage.TAG).commit();
+                mPageLiset.get(3).initData();
+                break;
+        }
+    }
+
     private void setToolbarTitle(int Rsd){
         getSupportActionBar().setTitle(Rsd);
     }

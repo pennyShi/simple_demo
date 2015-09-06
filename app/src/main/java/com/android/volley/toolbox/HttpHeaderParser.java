@@ -262,6 +262,6 @@ public class HttpHeaderParser {
      * or the HTTP default (ISO-8859-1) if none can be found.
      */
     public static String parseCharset(Map<String, String> headers) {
-        return parseCharset(headers, HTTP.DEFAULT_CONTENT_CHARSET);
+        return parseCharset(headers, "UTF-8");
     }
 }

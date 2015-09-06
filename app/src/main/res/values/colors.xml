@@ -7,5 +7,6 @@
     <color name="white">#FFFFFF</color>
     <color name="red">#FF0000</color>
     <color name="transparent">#00000000</color>
+    <color name="background_tab_pressed">#4876FF</color>
 
 </resources>

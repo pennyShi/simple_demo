@@ -12,9 +12,13 @@ import com.android.volley.error.AuthFailureError;
 import com.android.volley.error.VolleyError;
 import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.fasterxml.jackson.databind.JavaType;
+import com.idreamo.rrtoyewx.smipledemo.utils.JsonUtil;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,16 +37,19 @@ public class ServerApi {
         mRequestQueue = Volley.newRequestQueue(context);
         mSimpleImageLoader = new SimpleImageLoader(mRequestQueue,BitmapImageCache.getInstance(null));
     }
-
-
-
-
-
+    //get total news
     public static void getTotalNews(final Response.Listener<String> listener, final Response.ErrorListener errorListener){
-        Request request = buildGetRequest(ServerApi.TotalNews,null,listener,errorListener);
+        Request request = buildRequest(ServerApi.TotalNews, null, listener, errorListener);
         mRequestQueue.add(request);
     }
-    public static Request buildGetRequest(final String url,final Map<String,String>params,final Response.Listener<String> listener, final Response.ErrorListener errorListener){
+    //get total detail news
+    public static void getDetailsNews(final String url,final Response.Listener<String> listener, final Response.ErrorListener errorListener){
+        Request request = buildRequest(url,null,listener,errorListener);
+        mRequestQueue.add(request);
+    }
+
+
+    public static Request buildRequest(final String url,final Map<String,String>params,final Response.Listener<String> listener, final Response.ErrorListener errorListener){
         final StringRequest request = new StringRequest(Request.Method.GET,url,null,null){
 
             @Override
@@ -92,5 +99,36 @@ public class ServerApi {
         request.setForceRequest(true);
         return request;
     }
+
+    public static Object deserialize(String json, String containerType, Class cls) throws Exception {
+        try {
+            if ("List".equals(containerType)) {
+                JavaType typeInfo = JsonUtil.getJsonMapper().getTypeFactory().constructCollectionType(List.class, cls);
+                List response = (List<?>) JsonUtil.getJsonMapper().readValue(json, typeInfo);
+                return response;
+            } else if (String.class.equals(cls)) {
+                if (json != null && json.startsWith("\"") && json.endsWith("\"") && json.length() > 1)
+                    return json.substring(1, json.length() - 2);
+                else
+                    return json;
+            } else {
+                return JsonUtil.getJsonMapper().readValue(json, cls);
+            }
+        } catch (IOException e) {
+            throw e;
+        }
+    }
+
+    private static String serialize(Object obj) throws Exception {
+        try {
+            if (obj != null)
+                return JsonUtil.getJsonMapper().writeValueAsString(obj);
+            else
+                return null;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
 
 }

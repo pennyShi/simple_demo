@@ -11,6 +11,10 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    packagingOptions{
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -24,4 +28,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile files('libs/jackson-annotations-2.6.0.jar')
     compile files('libs/gson-2.3.1.jar')
+    compile files('libs/jackson-databind-2.5.3.jar')
+    compile files('libs/jackson-core-2.5.3.jar')
 }
