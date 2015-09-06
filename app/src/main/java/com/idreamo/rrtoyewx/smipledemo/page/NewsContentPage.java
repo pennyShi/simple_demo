@@ -30,19 +30,14 @@ public class NewsContentPage extends BaseContentPage {
         mSwipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
-               android.R.color.holo_red_light);
+                android.R.color.holo_red_light);
         mListView = (ListView) view.findViewById(R.id.lv_news_contents);
-        /*TextView view  = new TextView(mContext);
-        view.setText("1231");
-        view.setTextSize(20);
-        view.setTextColor(Color.RED);*/
         return view;
     }
 
     @Override
     public void initData() {
-       // mListView.setEmptyView(mEmptyView);
-       // requestData();
+        mSwipeRefreshLayout.setRefreshing(true);
     }
 
 

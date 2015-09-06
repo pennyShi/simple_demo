@@ -23,17 +23,12 @@ public class NewsPageContentAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return mPageList.size();
+        return mTotalNewsModelList.size();
     }
 
     public NewsPageContentAdapter(List<TotalNewsModel> totalNewsModelList,Context context) {
         this.mTotalNewsModelList = totalNewsModelList;
         mContext = context;
-        for (TotalNewsModel totalNewsModel : mTotalNewsModelList) {
-            NewsContentPage newsContentPage = new NewsContentPage(context);
-            newsContentPage.setUrl((String) totalNewsModel.getValue().get(TotalNewsModel.news_url));
-            mPageList.add(newsContentPage);
-        }
     }
 
     @Override
@@ -47,6 +42,7 @@ public class NewsPageContentAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         NewsContentPage newsContentPage = new NewsContentPage(mContext);
         container.addView(newsContentPage.getRootView());
+        newsContentPage.initData();
         return newsContentPage.getRootView();
     }
 
