@@ -31,6 +31,7 @@ public abstract class BaseContentPage {
     public void setUrl(String mUrl) {
         this.mUrl = mUrl;
     }
+
     public View getRootView(){
         return mRootView;
     }

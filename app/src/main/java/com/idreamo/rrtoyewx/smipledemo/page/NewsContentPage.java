@@ -37,7 +37,8 @@ public class NewsContentPage extends BaseContentPage {
 
     @Override
     public void initData() {
-        mSwipeRefreshLayout.setRefreshing(true);
+        TextView tv = (TextView) mRootView.findViewById(R.id.tv_url);
+        tv.setText(mUrl+"");
     }
 
 

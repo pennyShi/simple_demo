@@ -1,5 +1,6 @@
 package com.idreamo.rrtoyewx.smipledemo.page;
 
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 
 import com.android.volley.Response;
@@ -19,12 +20,13 @@ import java.util.Map;
 public class NewsPage extends BasePage {
     public static final String TAG = "NewsPage";
     private List<TotalNewsModel> mTotalNewsModelList;
+    private NewsPageContentAdapter mNewsPageContentAdapter;
 
     @Override
     public void initData() {
         RequestData();
         super.initData();
-        
+
     }
 
     private void RequestData() {
@@ -66,8 +68,38 @@ public class NewsPage extends BasePage {
 
             }
         }
-        mPageContent.setAdapter(new NewsPageContentAdapter(mTotalNewsModelList,mActivity));
+        mNewsPageContentAdapter =  new NewsPageContentAdapter(mTotalNewsModelList,mActivity);
+        mPageContent.setAdapter(mNewsPageContentAdapter);
         mPageTitle.setViewPager(mPageContent);
+        setNewsDetails(1);
+        bind();
     }
-    
+
+    private void bind() {
+        mPageTitle.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                setNewsDetails(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    private void setNewsDetails(int position) {
+        BaseContentPage baseContentPage = mNewsPageContentAdapter.getPageList().get(position);
+        if(baseContentPage instanceof NewsContentPage){
+            NewsContentPage newsContentPage = (NewsContentPage) baseContentPage;
+            newsContentPage.initData();
+        }
+    }
+
 }

@@ -15,6 +15,7 @@
         </ListView>
     </android.support.v4.widget.SwipeRefreshLayout  >
     <TextView android:layout_height="wrap_content"
+        android:id="@+id/tv_url"
         android:layout_width="wrap_content"
         android:text="21312"
         android:textColor="@color/black"

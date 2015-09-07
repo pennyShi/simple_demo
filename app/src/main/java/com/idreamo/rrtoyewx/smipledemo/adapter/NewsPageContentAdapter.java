@@ -19,7 +19,8 @@ import java.util.List;
 public class NewsPageContentAdapter extends PagerAdapter {
     private Context mContext;
     private List<TotalNewsModel> mTotalNewsModelList;
-    protected List<BaseContentPage> mPageList = new ArrayList<>();
+    protected List<BaseContentPage> mPageList;
+
 
     @Override
     public int getCount() {
@@ -28,6 +29,7 @@ public class NewsPageContentAdapter extends PagerAdapter {
 
     public NewsPageContentAdapter(List<TotalNewsModel> totalNewsModelList,Context context) {
         this.mTotalNewsModelList = totalNewsModelList;
+        mPageList = new ArrayList<>(mTotalNewsModelList.size());
         mContext = context;
     }
 
@@ -42,7 +44,11 @@ public class NewsPageContentAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         NewsContentPage newsContentPage = new NewsContentPage(mContext);
         container.addView(newsContentPage.getRootView());
-        newsContentPage.initData();
+        newsContentPage.setUrl((String) mTotalNewsModelList.get(position).getValue().get(TotalNewsModel.news_url));
+        mPageList.add(position,newsContentPage);
+        if(position == 0){
+            newsContentPage.initData();
+        }
         return newsContentPage.getRootView();
     }
 
@@ -54,5 +60,8 @@ public class NewsPageContentAdapter extends PagerAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
+    }
+    public List<BaseContentPage>getPageList(){
+        return mPageList;
     }
 }
