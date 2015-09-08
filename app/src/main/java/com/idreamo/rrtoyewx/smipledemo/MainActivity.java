@@ -154,19 +154,15 @@ public class MainActivity extends AppCompatActivity {
         switch (rsd){
             case R.string.news:
                 mFragmentManager.beginTransaction().replace(R.id.main_content,mPageLiset.get(0),NewsPage.TAG).commit();
-                mPageLiset.get(0).initData();
                 break;
             case R.string.photo:
                 mFragmentManager.beginTransaction().replace(R.id.main_content,mPageLiset.get(1),PhotoPage.TAG).commit();
-                mPageLiset.get(1).initData();
                 break;
             case R.string.video:
                 mFragmentManager.beginTransaction().replace(R.id.main_content,mPageLiset.get(2),VideoPage.TAG).commit();
-                mPageLiset.get(2).initData();
                 break;
             case R.string.music:
                 mFragmentManager.beginTransaction().replace(R.id.main_content,mPageLiset.get(3),MusicPage.TAG).commit();
-                mPageLiset.get(3).initData();
                 break;
         }
     }

@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import com.android.volley.Response;
 import com.android.volley.error.VolleyError;
 import com.idreamo.rrtoyewx.smipledemo.adapter.NewsPageContentAdapter;
+import com.idreamo.rrtoyewx.smipledemo.data.LocalDataHelper;
+import com.idreamo.rrtoyewx.smipledemo.data.TotalNewsInfo;
 import com.idreamo.rrtoyewx.smipledemo.entity.TotalNews;
 import com.idreamo.rrtoyewx.smipledemo.entity.TotalNewsModel;
 import com.idreamo.rrtoyewx.smipledemo.network.ServerApi;
@@ -22,58 +24,22 @@ public class NewsPage extends BasePage {
     private List<TotalNewsModel> mTotalNewsModelList;
     private NewsPageContentAdapter mNewsPageContentAdapter;
 
+
     @Override
-    public void initData() {
-        RequestData();
-        super.initData();
-
+    public void onResume() {
+        super.onResume();
+        loadData();
     }
 
-    private void RequestData() {
-        ServerApi.getTotalNews(new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    parseData(response);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-    }
-
-    private void parseData(String response) throws Exception {
-        if(response==null && TextUtils.isEmpty(response)){
-            return;
-        }
-
-        String children = response.substring(response.indexOf("\"children"), response.indexOf("]")+1);
-        children = "{" + children +"}";
-        TotalNews totalNews = (TotalNews) ServerApi.deserialize(children, "", TotalNews.class);
-        if(totalNews!=null && totalNews.getChildren()!=null && totalNews.getChildren().size() > 0){
-            mTotalNewsModelList = new ArrayList<>();
-            for(Map<String, Object> map: totalNews.getChildren()){
-                int type = (int) map.get(TotalNewsModel.news_type);
-                if(type == 1){
-                    TotalNewsModel totalNewsModel = new TotalNewsModel();
-                    totalNewsModel.setValue(map);
-                    mTotalNewsModelList.add(totalNewsModel);
-                }
-
-            }
-        }
+    private void loadData() {
+        mTotalNewsModelList =  getTotalNewsInfos();
         mNewsPageContentAdapter =  new NewsPageContentAdapter(mTotalNewsModelList,mActivity);
         mPageContent.setAdapter(mNewsPageContentAdapter);
         mPageTitle.setViewPager(mPageContent);
-        setNewsDetails(1);
-        bind();
+
     }
+
+
 
     private void bind() {
         mPageTitle.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -84,7 +50,7 @@ public class NewsPage extends BasePage {
 
             @Override
             public void onPageSelected(int position) {
-                setNewsDetails(position);
+
             }
 
             @Override
@@ -94,12 +60,17 @@ public class NewsPage extends BasePage {
         });
     }
 
-    private void setNewsDetails(int position) {
-        BaseContentPage baseContentPage = mNewsPageContentAdapter.getPageList().get(position);
-        if(baseContentPage instanceof NewsContentPage){
-            NewsContentPage newsContentPage = (NewsContentPage) baseContentPage;
-            newsContentPage.initData();
+    public List<TotalNewsModel> getTotalNewsInfos() {
+        List<TotalNewsInfo> totalNewsInfos = LocalDataHelper.getLocalDataHelper().getTotalNewsInfoDAO().queryForAll();
+        if(totalNewsInfos!=null && totalNewsInfos.size() > 0){
+            List<TotalNewsModel> totalNewsModels = new ArrayList<>();
+            for(TotalNewsInfo info :totalNewsInfos){
+                TotalNewsModel totalNewsModel = info.getTotalNewsModel();
+                totalNewsModels.add(totalNewsModel);
+            }
+            return totalNewsModels;
         }
+        
+        return null;
     }
-
 }

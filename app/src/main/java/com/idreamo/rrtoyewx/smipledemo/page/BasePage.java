@@ -34,11 +34,8 @@ public class BasePage extends Fragment {
     @Override
     public void onActivityCreated( Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initData();
     }
 
-
-    public void initData(){};
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

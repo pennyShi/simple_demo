@@ -4,7 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
+
+import java.sql.SQLException;
 
 /**
  * Created by rrtoyewx on 15/9/7.
@@ -12,33 +16,50 @@ import com.j256.ormlite.support.ConnectionSource;
 public class LocalDataHelper extends OrmLiteSqliteOpenHelper {
     public static final String DB_NAME = "simple_demo";
     public static final int DB_VERSION = 1;
-    public static LocalDataHelper localDataHelper_instance = null;
+    public static LocalDataHelper mLocalDataHelper_instance = null;
+
+    //###################DAO###############################
+    private RuntimeExceptionDao<TotalNewsInfo, Integer> mTotalNewsInfoDAO = null;
 
 
     public LocalDataHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
-    public  void init(Context context) {
-        if (localDataHelper_instance==null) {
+
+    public static void init(Context context) {
+        if (mLocalDataHelper_instance==null) {
             synchronized (LocalDataHelper.class){
-                if(localDataHelper_instance==null){
-                    localDataHelper_instance = new LocalDataHelper(context);
+                if(mLocalDataHelper_instance==null){
+                    mLocalDataHelper_instance = new LocalDataHelper(context);
                 }
             }
         }
     }
 
-    public synchronized LocalDataHelper getLocalDataHelper(){
-        return localDataHelper_instance;
+    public static synchronized LocalDataHelper getLocalDataHelper(){
+        return mLocalDataHelper_instance;
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
+        try {
+            TableUtils.createTableIfNotExists(connectionSource, TotalNewsInfo.class);
+            mTotalNewsInfoDAO = getTotalNewsInfoDAO();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int i, int i1) {
 
+    }
+
+    public RuntimeExceptionDao<TotalNewsInfo, Integer> getTotalNewsInfoDAO(){
+        if(mTotalNewsInfoDAO==null){
+            mTotalNewsInfoDAO = getRuntimeExceptionDao(TotalNewsInfo.class);
+        }
+        return mTotalNewsInfoDAO;
     }
 }
