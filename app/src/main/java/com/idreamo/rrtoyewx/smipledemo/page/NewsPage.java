@@ -23,6 +23,8 @@ public class NewsPage extends BasePage {
     public static final String TAG = "NewsPage";
     private List<TotalNewsModel> mTotalNewsModelList;
     private NewsPageContentAdapter mNewsPageContentAdapter;
+    private List<BaseContentPage> mPageList;
+    private boolean mIsLoading;
 
 
     @Override
@@ -33,10 +35,17 @@ public class NewsPage extends BasePage {
 
     private void loadData() {
         mTotalNewsModelList =  getTotalNewsInfos();
-        mNewsPageContentAdapter =  new NewsPageContentAdapter(mTotalNewsModelList,mActivity);
+        mPageList = new ArrayList<>();
+        int size = mTotalNewsModelList.size();
+        for(int i = 0;i < size;i++){
+            NewsContentPage page = new NewsContentPage(mActivity);
+            page.setUrl((String) mTotalNewsModelList.get(i).getValue().get(TotalNewsModel.news_url));
+            mPageList.add(page);
+        }
+        mNewsPageContentAdapter =  new NewsPageContentAdapter(mTotalNewsModelList,mPageList,mActivity);
         mPageContent.setAdapter(mNewsPageContentAdapter);
         mPageTitle.setViewPager(mPageContent);
-
+        bind();
     }
 
 
@@ -50,7 +59,7 @@ public class NewsPage extends BasePage {
 
             @Override
             public void onPageSelected(int position) {
-
+                showPageContent(position);
             }
 
             @Override
@@ -58,6 +67,10 @@ public class NewsPage extends BasePage {
 
             }
         });
+    }
+
+    private void showPageContent(int position) {
+        mPageList.get(position).initData();
     }
 
     public List<TotalNewsModel> getTotalNewsInfos() {

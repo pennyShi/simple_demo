@@ -15,11 +15,11 @@ public abstract class BaseContentPage {
     public BaseContentPage(Context context){
         this.mContext = context;
         mInflater = LayoutInflater.from(context);
-        View view = initView();
-        mRootView = view;
-
     }
 
+    public void setmRootView(){
+        mRootView = initView();
+    }
     public abstract View initView();
 
     public void initData(){};

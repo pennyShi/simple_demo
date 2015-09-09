@@ -37,6 +37,7 @@ public class ServerApi {
         mRequestQueue = Volley.newRequestQueue(context);
         mSimpleImageLoader = new SimpleImageLoader(mRequestQueue,BitmapImageCache.getInstance(null));
     }
+
     //get total news
     public static void getTotalNews(final Response.Listener<String> listener, final Response.ErrorListener errorListener){
         Request request = buildRequest(ServerApi.TotalNews, null, listener, errorListener);
