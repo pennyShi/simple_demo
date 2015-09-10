@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.util.List;
+
 /**
  * Created by rrtoyewx on 15/8/21.
  */
@@ -33,6 +35,13 @@ public abstract class SimpleAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return 0;
+    }
+
+    public void setListFromServer(SparseArray<?> list){
+        if(list!=null && list.size() > 0){
+            mlist = list;
+            notifyDataSetChanged();
+        }
     }
 
 }

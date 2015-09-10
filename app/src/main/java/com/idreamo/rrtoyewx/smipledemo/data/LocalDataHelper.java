@@ -3,6 +3,7 @@ package com.idreamo.rrtoyewx.smipledemo.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.idreamo.rrtoyewx.smipledemo.entity.NewsTopModel;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
@@ -20,6 +21,8 @@ public class LocalDataHelper extends OrmLiteSqliteOpenHelper {
 
     //###################DAO###############################
     private RuntimeExceptionDao<TotalNewsInfo, Integer> mTotalNewsInfoDAO = null;
+    private RuntimeExceptionDao<NewsTopInfo,Integer>mNewsTopInfoDAO = null;
+    private RuntimeExceptionDao<NewsContentInfo,Integer>mNewsContentInfoDAO = null;
 
 
     public LocalDataHelper(Context context) {
@@ -44,7 +47,12 @@ public class LocalDataHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
         try {
             TableUtils.createTableIfNotExists(connectionSource, TotalNewsInfo.class);
+            TableUtils.createTableIfNotExists(connectionSource,NewsTopInfo.class);
+            TableUtils.createTableIfNotExists(connectionSource, NewsContentInfo.class);
+
             mTotalNewsInfoDAO = getTotalNewsInfoDAO();
+            mNewsTopInfoDAO = getNewsTopInfoDAO();
+            mNewsContentInfoDAO = getNewsContentInfoDAO();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -61,5 +69,17 @@ public class LocalDataHelper extends OrmLiteSqliteOpenHelper {
             mTotalNewsInfoDAO = getRuntimeExceptionDao(TotalNewsInfo.class);
         }
         return mTotalNewsInfoDAO;
+    }
+    public RuntimeExceptionDao<NewsTopInfo, Integer> getNewsTopInfoDAO(){
+        if(mNewsTopInfoDAO==null){
+            mNewsTopInfoDAO = getRuntimeExceptionDao(NewsTopInfo.class);
+        }
+        return mNewsTopInfoDAO;
+    }
+    public RuntimeExceptionDao<NewsContentInfo, Integer> getNewsContentInfoDAO(){
+        if(mNewsContentInfoDAO==null){
+            mNewsContentInfoDAO = getRuntimeExceptionDao(NewsContentInfo.class);
+        }
+        return mNewsContentInfoDAO;
     }
 }

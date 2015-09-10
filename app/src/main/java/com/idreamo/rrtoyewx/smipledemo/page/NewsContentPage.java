@@ -10,6 +10,10 @@ import android.widget.TextView;
 import com.android.volley.Response;
 import com.android.volley.error.VolleyError;
 import com.idreamo.rrtoyewx.smipledemo.R;
+import com.idreamo.rrtoyewx.smipledemo.application.SimpleDemoApplicaton;
+import com.idreamo.rrtoyewx.smipledemo.data.LocalDataHelper;
+import com.idreamo.rrtoyewx.smipledemo.data.NewsContentInfo;
+import com.idreamo.rrtoyewx.smipledemo.data.NewsTopInfo;
 import com.idreamo.rrtoyewx.smipledemo.entity.NewsContent;
 import com.idreamo.rrtoyewx.smipledemo.entity.NewsContentModel;
 import com.idreamo.rrtoyewx.smipledemo.entity.NewsTopModel;
@@ -49,7 +53,6 @@ public class NewsContentPage extends BaseContentPage {
 
     @Override
     public void initData() {
-
         bind();
     }
 
@@ -62,6 +65,7 @@ public class NewsContentPage extends BaseContentPage {
                     public void onResponse(String response) {
                         parseDataAndLoadDB(response);
                         mSwipeRefreshLayout.setRefreshing(false);
+                        //SimpleDemoApplicaton.getSimpleDemoApplicaton().setTheme(android.R.style.);
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -82,19 +86,36 @@ public class NewsContentPage extends BaseContentPage {
                 for(Map<String ,Object> map : newsContent.getData().getTopNews()){
                     NewsTopModel newsTopModel = new NewsTopModel();
                     newsTopModel.setValue(map);
+                    NewsTopInfo topNewsInfo = NewsTopInfo.createTopNewsInfo(newsTopModel);
+                    LocalDataHelper.getLocalDataHelper().getNewsTopInfoDAO().createIfNotExists(topNewsInfo);
                     mTopNewsList.add(newsTopModel);
                 }
                 for(Map<String,Object> map :newsContent.getData().getNews()){
                     NewsContentModel newsContentModel = new NewsContentModel();
                     newsContentModel.setValue(map);
+                    NewsContentInfo newsContentInfo = NewsContentInfo.createNewsContentInfo(newsContentModel);
+                    LocalDataHelper.getLocalDataHelper().getNewsContentInfoDAO().createIfNotExists(newsContentInfo);
                     mNewsContentModelList.add(newsContentModel);
+                }
+                if(mNewsContentModelList.size() > 0){
+
                 }
 
             }
-            newsContent.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+
+
+    private List<NewsTopInfo> getNewsTopInfoList(){
+        return LocalDataHelper.getLocalDataHelper().getNewsTopInfoDAO().queryForAll();
+    }
+
+    private List<NewsContentInfo> getNewsContentInfoList(){
+        return LocalDataHelper.getLocalDataHelper().getNewsContentInfoDAO().queryForAll();
     }
 
 
