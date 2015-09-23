@@ -3,6 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_entermode">Enter Mode</string>
     <string name="title_activity_welcome">WelcomeActivity</string>
     <string name="SimleDemo">Simle Demo</string>
     <string name="Rrtoyewx">Rrtoyewx</string>

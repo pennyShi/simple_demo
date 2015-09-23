@@ -13,6 +13,9 @@ import com.idreamo.rrtoyewx.smipledemo.page.NewsContentPage;
 import java.util.ArrayList;
 import java.util.List;
 
+import jazzyviewpager.JazzyViewPager;
+import jazzyviewpager.OutlineContainer;
+
 /**
  * Created by rrtoyewx on 15/9/6.
  */
@@ -20,6 +23,7 @@ public class NewsPageContentAdapter extends PagerAdapter {
     private Context mContext;
     private List<TotalNewsModel> mTotalNewsModelList;
     private List<BaseContentPage> mPageList;
+    private JazzyViewPager mJazzyViewPager;
 
 
 
@@ -28,10 +32,11 @@ public class NewsPageContentAdapter extends PagerAdapter {
         return mTotalNewsModelList.size();
     }
 
-    public NewsPageContentAdapter(List<TotalNewsModel> totalNewsModelList,List<BaseContentPage> list,Context context) {
+    public NewsPageContentAdapter(JazzyViewPager JazzyViewPager,List<TotalNewsModel> totalNewsModelList,List<BaseContentPage> list,Context context) {
         this.mTotalNewsModelList = totalNewsModelList;
         mContext = context;
         mPageList =  list;
+        mJazzyViewPager = JazzyViewPager;
     }
 
     @Override
@@ -49,17 +54,24 @@ public class NewsPageContentAdapter extends PagerAdapter {
             page.initData();
 
         }
-        return page.getRootView();
+        View rootView = page.getRootView();
+        mJazzyViewPager.setObjectForPosition(rootView, position);
+        return rootView;
     }
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == object;
+        if (view instanceof OutlineContainer) {
+            return ((OutlineContainer) view).getChildAt(0) == object;
+        } else {
+            return view == object;
+        }
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View) object);
+
+        container.removeView(mJazzyViewPager.findViewFromObject(position));
     }
 
 }

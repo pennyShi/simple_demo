@@ -14,6 +14,7 @@ import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -115,7 +116,9 @@ public class MainActivity extends AppCompatActivity {
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                return false;
+
+
+                return true;
             }
         });
         mDrawLayout.setDrawerListener(mActionBarDrawerToggle);
@@ -147,6 +150,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void switchMode() {
+
     }
 
     private void setPageContent(int rsd) {

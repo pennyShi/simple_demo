@@ -15,11 +15,11 @@
         android:layout_height="45dp">
     </com.android.astuetz.PagerSlidingTabStrip>
 
-    <android.support.v4.view.ViewPager
+    <jazzyviewpager.JazzyViewPager
         android:id="@+id/vp_base_page_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-    </android.support.v4.view.ViewPager>
+    </jazzyviewpager.JazzyViewPager>
 
 </LinearLayout>

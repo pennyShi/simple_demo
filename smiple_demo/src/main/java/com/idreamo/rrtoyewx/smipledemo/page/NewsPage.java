@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import jazzyviewpager.JazzyViewPager;
 
 /**
  * Created by rrtoyewx on 15/8/21.
@@ -44,9 +45,9 @@ public class NewsPage extends BasePage {
             page.setUrl((String) mTotalNewsModelList.get(i).getValue().get(TotalNewsModel.news_url));
             mPageList.add(page);
         }
-        mNewsPageContentAdapter =  new NewsPageContentAdapter(mTotalNewsModelList,mPageList,mActivity);
-        mPageContent.setAdapter(mNewsPageContentAdapter);
-        mPageTitle.setViewPager(mPageContent);
+        mNewsPageContentAdapter =  new NewsPageContentAdapter(mJazzyViewPager,mTotalNewsModelList,mPageList,mActivity);
+        mJazzyViewPager.setAdapter(mNewsPageContentAdapter);
+        mPageTitle.setViewPager(mJazzyViewPager);
         bind();
     }
 

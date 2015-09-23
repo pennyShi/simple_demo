@@ -13,6 +13,7 @@ import com.android.astuetz.PagerSlidingTabStrip;
 import com.idreamo.rrtoyewx.smipledemo.R;
 
 import de.greenrobot.event.EventBus;
+import jazzyviewpager.JazzyViewPager;
 
 /**
  * Created by rrtoyewx on 15/8/21.
@@ -21,13 +22,14 @@ public class BasePage extends Fragment {
     protected View mRootView;
     protected Activity mActivity;
     protected PagerSlidingTabStrip mPageTitle;
-    protected ViewPager mPageContent;
+    protected JazzyViewPager mJazzyViewPager;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.base_page_fragment, null);
-        mPageContent = (ViewPager) view.findViewById(R.id.vp_base_page_content);
+        mJazzyViewPager = (JazzyViewPager) view.findViewById(R.id.vp_base_page_content);
+        mJazzyViewPager.setTransitionEffect(JazzyViewPager.TransitionEffect.ZoomIn);
         mPageTitle = (PagerSlidingTabStrip) view.findViewById(R.id.psts_base_page_title);
         mRootView = view;
         initData();
