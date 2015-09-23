@@ -21,7 +21,7 @@ public class LeftMenuAdapter extends SimpleAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if(convertView==null){
-            convertView = mLayout.inflate(R.layout.item_leftmenu,null);
+            convertView = mInflater.inflate(R.layout.item_leftmenu,null);
             holder = new ViewHolder();
             holder.leftMenu_icon = (ImageView) convertView.findViewById(R.id.item_leftmenu_icon);
             holder.leftMenu_title = (TextView) convertView.findViewById(R.id.item_leftmenu_title);

@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import com.android.astuetz.PagerSlidingTabStrip;
 import com.idreamo.rrtoyewx.smipledemo.R;
 
+import de.greenrobot.event.EventBus;
+
 /**
  * Created by rrtoyewx on 15/8/21.
  */
@@ -28,9 +30,12 @@ public class BasePage extends Fragment {
         mPageContent = (ViewPager) view.findViewById(R.id.vp_base_page_content);
         mPageTitle = (PagerSlidingTabStrip) view.findViewById(R.id.psts_base_page_title);
         mRootView = view;
+        initData();
         return view;
     }
+    protected void initData(){
 
+    }
     @Override
     public void onActivityCreated( Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -41,5 +46,10 @@ public class BasePage extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.mActivity = getActivity();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -1,20 +1,16 @@
 package com.idreamo.rrtoyewx.smipledemo.page;
 
 import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
 
-import com.android.volley.Response;
-import com.android.volley.error.VolleyError;
 import com.idreamo.rrtoyewx.smipledemo.adapter.NewsPageContentAdapter;
 import com.idreamo.rrtoyewx.smipledemo.data.LocalDataHelper;
 import com.idreamo.rrtoyewx.smipledemo.data.TotalNewsInfo;
-import com.idreamo.rrtoyewx.smipledemo.entity.TotalNews;
 import com.idreamo.rrtoyewx.smipledemo.entity.TotalNewsModel;
-import com.idreamo.rrtoyewx.smipledemo.network.ServerApi;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by rrtoyewx on 15/8/21.
@@ -24,13 +20,19 @@ public class NewsPage extends BasePage {
     private List<TotalNewsModel> mTotalNewsModelList;
     private NewsPageContentAdapter mNewsPageContentAdapter;
     private List<BaseContentPage> mPageList;
-    private boolean mIsLoading;
+
+
+    @Override
+    protected void initData() {
+        super.initData();
+        loadData();
+    }
+
 
 
     @Override
     public void onResume() {
         super.onResume();
-        loadData();
     }
 
     private void loadData() {

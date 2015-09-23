@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        mLeftMenu.deferNotifyDataSetChanged();
         super.onResume();
     }
 

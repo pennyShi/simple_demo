@@ -1,6 +1,7 @@
 package com.idreamo.rrtoyewx.smipledemo.network;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.android.volley.Cache;
 import com.android.volley.Request;
@@ -32,10 +33,17 @@ public class ServerApi {
 
     private static RequestQueue mRequestQueue = null;
     private static SimpleImageLoader mSimpleImageLoader = null;
+    private static Context mContext;
 
     public static void init(Context context){
         mRequestQueue = Volley.newRequestQueue(context);
         mSimpleImageLoader = new SimpleImageLoader(mRequestQueue,BitmapImageCache.getInstance(null));
+        mContext = context;
+    }
+
+    //getSimpleImageLoader
+    public static SimpleImageLoader getImageLoader() {
+        return mSimpleImageLoader;
     }
 
     //get total news
@@ -73,7 +81,7 @@ public class ServerApi {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (request == null) {
-
+                    return ;
                 }
 
                 Cache.Entry entry = mRequestQueue.getCache().get(request.getCacheKey());
@@ -91,6 +99,7 @@ public class ServerApi {
                         return;
                     }
                 }
+
 
                 errorListener.onErrorResponse(error);
             }

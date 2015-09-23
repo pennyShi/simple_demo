@@ -16,6 +16,7 @@ import com.idreamo.rrtoyewx.smipledemo.data.LocalDataHelper;
 import com.idreamo.rrtoyewx.smipledemo.data.TotalNewsInfo;
 import com.idreamo.rrtoyewx.smipledemo.entity.TotalNews;
 import com.idreamo.rrtoyewx.smipledemo.entity.TotalNewsModel;
+import com.idreamo.rrtoyewx.smipledemo.event.TotalNewsDownloadEvent;
 import com.idreamo.rrtoyewx.smipledemo.network.ServerApi;
 import com.j256.ormlite.table.TableUtils;
 
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import de.greenrobot.event.EventBus;
 
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -35,6 +38,7 @@ public class WelcomeActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_welcome);
         initView();
+        EventBus.getDefault().register(this);
         setBackGround();
         bind();
         requestTotalNews();
@@ -63,6 +67,16 @@ public class WelcomeActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    public void onEventMainThread(TotalNewsDownloadEvent event) {
+
+    }
+
     private void setBackGround() {
         SimpleDateFormat formatter = new SimpleDateFormat("HH");
         Date curDate = new Date(System.currentTimeMillis());
@@ -86,6 +100,7 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     parseDataAndLoadDB(response);
+                    EventBus.getDefault().post(new TotalNewsDownloadEvent());
 
                 } catch (Exception e) {
                     e.printStackTrace();

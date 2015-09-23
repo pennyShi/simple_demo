@@ -11,7 +11,12 @@
         <ListView
             android:id="@+id/lv_news_contents"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fadingEdge="none"
+            android:fastScrollEnabled="false"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:smoothScrollbar="true">
         </ListView>
     </android.support.v4.widget.SwipeRefreshLayout  >
 </FrameLayout>

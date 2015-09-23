@@ -2,6 +2,20 @@
 <items version="2" >
 
     <item
+        jar="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/libs/ormlite-android-4.48.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="afa06f539a4026c10b247386312aa67404b80a16">
+        <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/ormlite-android-4.48-91bbec24ef7524d3751bf677e9ac3de456f75372.jar" />
+    </item>
+    <item
+        jar="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/libs/jackson-core-2.5.3.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a8b8a6dfc8a17890e4c7ff8aed810763d265b68b">
+        <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/jackson-core-2.5.3-1249b824540de460907fb59939a7858862a95d8b.jar" />
+    </item>
+    <item
         jar="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/libs/jackson-annotations-2.6.0.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -16,39 +30,11 @@
         <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/classes-c32cd1b49ac8197745e3236036282ea4792d9b9d.jar" />
     </item>
     <item
-        jar="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/libs/gson-2.3.1.jar"
+        jar="/Users/rrtoyewx/.gradle/caches/modules-2/files-2.1/de.greenrobot/eventbus/2.4.0/ddd166d01b3158d1c00576d29f7ed15c030df719/eventbus-2.4.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/gson-2.3.1-0ebb2186daf3083c5d93a3eb52470f5063c7167b.jar" />
-    </item>
-    <item
-        jar="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/libs/ormlite-core-4.48.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e579bd2905d0399af5029aaaf9817d5fa0ca88a5">
-        <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/ormlite-core-4.48-df3dcde107d7370c32b6fb09a1eae3cfabdbd6a6.jar" />
-    </item>
-    <item
-        jar="/Users/rrtoyewx/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/7.0.1/d5d13ea991eab0252e3710e5df3d6a9d4b21d461/butterknife-7.0.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
-        <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/butterknife-7.0.1-eb62311da7d3a4a08aead9901b4c9b217d5b4402.jar" />
-    </item>
-    <item
-        jar="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
-        <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-9beca8aa10cda3072385ec9eb9175972f93dec2d.jar" />
-    </item>
-    <item
-        jar="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/libs/jackson-core-2.5.3.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a8b8a6dfc8a17890e4c7ff8aed810763d265b68b">
-        <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/jackson-core-2.5.3-1249b824540de460907fb59939a7858862a95d8b.jar" />
+        sha1="ddd166d01b3158d1c00576d29f7ed15c030df719">
+        <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/eventbus-2.4.0-3e9da3f9a23b6d6b2647b6bb8bc19cb0cdffdeec.jar" />
     </item>
     <item
         jar="/Users/rrtoyewx/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
@@ -58,6 +44,20 @@
         <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-5caacd41f3762b8c74232e2ba3ccb0ee4e731a4a.jar" />
     </item>
     <item
+        jar="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/libs/nineoldandroids-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="59f19e43354d32de831379c23ce03bb259a4c2b7">
+        <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/nineoldandroids-2.4.0-8e4522a2c56dfee9a18da2c0c013f94724a5bc9d.jar" />
+    </item>
+    <item
+        jar="/Users/rrtoyewx/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/7.0.1/d5d13ea991eab0252e3710e5df3d6a9d4b21d461/butterknife-7.0.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/butterknife-7.0.1-eb62311da7d3a4a08aead9901b4c9b217d5b4402.jar" />
+    </item>
+    <item
         jar="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/libs/jackson-databind-2.5.3.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -65,11 +65,25 @@
         <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/jackson-databind-2.5.3-892a2c08ef32cf0120dde899f6edb1138c6368de.jar" />
     </item>
     <item
-        jar="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/libs/ormlite-android-4.48.jar"
+        jar="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="afa06f539a4026c10b247386312aa67404b80a16">
-        <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/ormlite-android-4.48-91bbec24ef7524d3751bf677e9ac3de456f75372.jar" />
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-9beca8aa10cda3072385ec9eb9175972f93dec2d.jar" />
+    </item>
+    <item
+        jar="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/libs/ormlite-core-4.48.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e579bd2905d0399af5029aaaf9817d5fa0ca88a5">
+        <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/ormlite-core-4.48-df3dcde107d7370c32b6fb09a1eae3cfabdbd6a6.jar" />
+    </item>
+    <item
+        jar="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/libs/gson-2.3.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/pre-dexed/debug/gson-2.3.1-0ebb2186daf3083c5d93a3eb52470f5063c7167b.jar" />
     </item>
     <item
         jar="/Users/rrtoyewx/Documents/android/simple_demo/smiple_demo/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"

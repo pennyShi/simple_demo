@@ -1,16 +1,14 @@
 package com.idreamo.rrtoyewx.smipledemo.page;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.error.VolleyError;
 import com.idreamo.rrtoyewx.smipledemo.R;
-import com.idreamo.rrtoyewx.smipledemo.application.SimpleDemoApplicaton;
+import com.idreamo.rrtoyewx.smipledemo.adapter.NewsContentListViewAdapter;
 import com.idreamo.rrtoyewx.smipledemo.data.LocalDataHelper;
 import com.idreamo.rrtoyewx.smipledemo.data.NewsContentInfo;
 import com.idreamo.rrtoyewx.smipledemo.data.NewsTopInfo;
@@ -33,6 +31,7 @@ public class NewsContentPage extends BaseContentPage {
     private List<NewsTopModel> mTopNewsList = new ArrayList<>();
     private List<NewsContentModel> mNewsContentModelList = new ArrayList<>();
 
+    private NewsContentListViewAdapter mNewsContentListViewAdapter;
 
 
     public NewsContentPage(Context context) {
@@ -41,6 +40,7 @@ public class NewsContentPage extends BaseContentPage {
 
     @Override
     public View initView() {
+
         View view = mInflater.inflate(R.layout.news_content_page, null);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_news_refresh);
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -50,9 +50,12 @@ public class NewsContentPage extends BaseContentPage {
         mListView = (ListView) view.findViewById(R.id.lv_news_contents);
         return view;
     }
-
     @Override
     public void initData() {
+        mSwipeRefreshLayout.setRefreshing(true);
+        mNewsContentListViewAdapter = new NewsContentListViewAdapter(mContext, mNewsContentModelList);
+        mListView.setAdapter(mNewsContentListViewAdapter);
+        requestData();
         bind();
     }
 
@@ -60,19 +63,21 @@ public class NewsContentPage extends BaseContentPage {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ServerApi.getDetailsNews(mUrl, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        parseDataAndLoadDB(response);
-                        mSwipeRefreshLayout.setRefreshing(false);
-                        //SimpleDemoApplicaton.getSimpleDemoApplicaton().setTheme(android.R.style.);
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                requestData();
+            }
+        });
+    }
 
-                    }
-                });
+    private void requestData() {
+        ServerApi.getDetailsNews(mUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                parseDataAndLoadDB(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
     }
@@ -83,38 +88,38 @@ public class NewsContentPage extends BaseContentPage {
             if (newsContent != null && newsContent.getData() != null
                     && newsContent.getData().getNews() != null && newsContent.getData().getNews().size() > 0
                     && newsContent.getData().getTopNews() != null && newsContent.getData().getTopNews().size() > 0) {
-                for(Map<String ,Object> map : newsContent.getData().getTopNews()){
+                for (Map<String, Object> map : newsContent.getData().getTopNews()) {
                     NewsTopModel newsTopModel = new NewsTopModel();
                     newsTopModel.setValue(map);
                     NewsTopInfo topNewsInfo = NewsTopInfo.createTopNewsInfo(newsTopModel);
                     LocalDataHelper.getLocalDataHelper().getNewsTopInfoDAO().createIfNotExists(topNewsInfo);
                     mTopNewsList.add(newsTopModel);
                 }
-                for(Map<String,Object> map :newsContent.getData().getNews()){
+                for (Map<String, Object> map : newsContent.getData().getNews()) {
                     NewsContentModel newsContentModel = new NewsContentModel();
                     newsContentModel.setValue(map);
                     NewsContentInfo newsContentInfo = NewsContentInfo.createNewsContentInfo(newsContentModel);
                     LocalDataHelper.getLocalDataHelper().getNewsContentInfoDAO().createIfNotExists(newsContentInfo);
                     mNewsContentModelList.add(newsContentModel);
                 }
-                if(mNewsContentModelList.size() > 0){
-
+                if (mNewsContentModelList.size() > 0) {
+                    mNewsContentListViewAdapter.setListFromServer(mNewsContentModelList);
                 }
 
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            mSwipeRefreshLayout.setRefreshing(false);
         }
     }
 
 
-
-
-    private List<NewsTopInfo> getNewsTopInfoList(){
+    private List<NewsTopInfo> getNewsTopInfoList() {
         return LocalDataHelper.getLocalDataHelper().getNewsTopInfoDAO().queryForAll();
     }
 
-    private List<NewsContentInfo> getNewsContentInfoList(){
+    private List<NewsContentInfo> getNewsContentInfoList() {
         return LocalDataHelper.getLocalDataHelper().getNewsContentInfoDAO().queryForAll();
     }
 
